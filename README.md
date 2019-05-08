@@ -1,2 +1,2 @@
 # Competitive Coding
-* Contains my solution to the question I solved since Feb'19
+* Contains my solutions to the questions I solved since Feb'19
