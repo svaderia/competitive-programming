@@ -30,15 +30,16 @@ void input(int N){
         q.push(0);
 
         vi fin_vert[N];
+        visited[0] = true;
 
         while(!q.empty()){
             int top = q.front();
             q.pop();
-            visited[top] = true;
             tr(vert[top], it){
                 if(visited[*it] != true){
                     q.push(*it);
                     fin_vert[top].pb(*it);
+                    visited[*it] = true;
                 }
             }
         }
