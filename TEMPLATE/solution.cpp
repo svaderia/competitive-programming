@@ -27,17 +27,18 @@ const double PI = acos(-1.0);
 #define repA(i, a, n)  for(int i = a; i <= (n); ++i)
 #define repD(i, a, n)  for(int i = a; i >= (n); --i)
 #define fill(a)  memset(a, 0, sizeof (a))
+#define error(x) cerr << #x << " = " << (x) <<endl
 
-double tick(){static clock_t oldt,newt=clock();double diff=1.0*(newt-oldt)/CLOCKS_PER_SEC;oldt=newt;return diff;}
 template<typename T> T gcd(T a, T b){return(b?__gcd(a,b):a);}
 template <typename T> T lcm(T a, T b){return (a*b)/gcd(a,b); }
-int mul(int a, int b, int c){lli res=(lli)a*b;return(res>=c?res%c:res);}
+int mul(int a, int b, int c){lli res=(lli)a*b;return (int)(res>=c?res%c:res);}
 template<typename T>T power(T e, T n, T m){T x=1,p=e;while(n){if(n&1)x=mul(x,p,m);p=mul(p,p,m);n>>=1;}return x;}
 int mod_neg(int a, int b, int c){int res;if(abs(a-b)<c)res=a-b;else res=(a-b)%c;return(res<0?res+c:res);}
 template<typename T>T extended_euclid(T a, T b, T &x, T &y){T xx=0,yy=1;y=0;x=1;while(b){T q=a/b,t=b;b=a%b;a=t;\
 t=xx;xx=x-q*xx;x=t;t=yy;yy=y-q*yy;y=t;}return a;}
 template<typename T>T mod_inverse(T a, T n){T x,y,z=0;T d=extended_euclid(a,n,x,y);return(d>1?-1:mod_neg(x,z,n));}
-
+template <class T>  inline void smax(T &x,T y){ x = max((x), (y));}
+template <class T>  inline void smin(T &x,T y){ x = min((x), (y));}
 
 
 int main(){
@@ -52,6 +53,6 @@ int main(){
     while(T-- > 0){
 
     }
-    // cout<<"Execution time : "<<tick()<<"\n";
+
     return 0;
 }
