@@ -1,4 +1,6 @@
 #include <bits/stdc++.h>
+#include <ext/pb_ds/assoc_container.hpp> 
+using namespace __gnu_pbds;
 using namespace std;
 
 typedef long long int lli;
@@ -6,6 +8,7 @@ typedef pair<int, int> pii;
 typedef vector<int> vi;
 typedef vector<lli> vli;
 typedef vector<pii> vii;
+typedef tree<int, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_update> OrderedSet;
 
 const int MOD	= 1e9 + 7;
 const double PI = acos(-1.0);
@@ -14,8 +17,10 @@ const double PI = acos(-1.0);
 #define sz(a) int((a).size())
 #define pb push_back
 #define mp make_pair
+#define mt make_tuple
+#define eb emplace_back
 #define all(c) (c).begin(),(c).end()
-#define tr(c,i) for(typeof((c).begin()) i = (c).begin(); i != (c).end(); i++)
+#define tr(c,i) for(auto &i : c)
 #define present(c,x) ((c).find(x) != (c).end())
 #define cpresent(c,x) (find(all(c),x) != (c).end())
 #define rep(i, n)    for(int i = 0; i < (n); ++i)
