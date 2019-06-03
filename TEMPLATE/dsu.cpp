@@ -14,8 +14,9 @@ typedef vector<pii> vii;
 #define tr(c,i) for(typeof((c).begin()) i = (c).begin(); i != (c).end(); i++)
 #define pb push_back
 
-int id[100005];
-int sz[100005];
+const int MAXN = 100005;
+int id[MAXN];
+int sz[MAXN];
 
 int root(int p){
     while(p != id[p]){
