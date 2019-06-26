@@ -27,7 +27,8 @@ const double PI = acos(-1.0);
 #define repA(i, a, n)  for(int i = a; i <= (n); ++i)
 #define repD(i, a, n)  for(int i = a; i >= (n); --i)
 #define fill(a)  memset(a, 0, sizeof (a))
-#define error(x) cerr << #x << " = " << (x) <<endl
+#define error(x) cerr << #x << " = " << (x) << endl
+#define errorp(p) cerr << #p << " = " << (p.first) << ", " << (p.second) << endl
 
 template<typename T> T gcd(T a, T b){return(b?__gcd(a,b):a);}
 template <typename T> T lcm(T a, T b){return (a*b)/gcd(a,b); }
