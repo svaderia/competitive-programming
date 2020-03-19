@@ -1,7 +1,3 @@
-// Test lli
-// Test sort function for different strings
-
-
 #include <bits/stdc++.h>
 //#include <ext/pb_ds/assoc_container.hpp> 
 // using namespace __gnu_pbds;
@@ -46,8 +42,8 @@ template <class T>  inline void smax(T &x,T y){ x = max((x), (y));}
 template <class T>  inline void smin(T &x,T y){ x = min((x), (y));}
 
 typedef struct node{
-    string l;
-    lli p;
+    string l[2];
+    int p;
 }node;
 
 const int MAXN = 50005;
@@ -131,20 +127,20 @@ int main(){
             string temp;
             cin >> temp;
             int shift = 0;
-            vector<string> v(2);
+            arr[i].l[0].clear();
+            arr[i].l[1].clear();
             // cout << temp << endl;
             tr(temp, x){
                 if(x == '/'){
                     shift = 1;
                 }else{
-                    v[shift].pb(x);
+                    arr[i].l[shift].pb(x);
                 }
             }
-            arr[i].l = v[0];
-            arr[i].p = stoi(v[1]);
+            arr[i].p = stoi(arr[i].l[1]);
             // error(arr[i].p);
         }
-        sort(arr, arr + N, compare); // Made a mistake here
+        sort(arr, arr + N, compare);
         
         build();
         trav(0, N);
