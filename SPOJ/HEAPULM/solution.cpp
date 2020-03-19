@@ -46,7 +46,7 @@ template <class T>  inline void smax(T &x,T y){ x = max((x), (y));}
 template <class T>  inline void smin(T &x,T y){ x = min((x), (y));}
 
 typedef struct node{
-    string l[2];
+    string l;
     lli p;
 }node;
 
@@ -131,20 +131,20 @@ int main(){
             string temp;
             cin >> temp;
             int shift = 0;
-            arr[i].l[0].clear();
-            arr[i].l[1].clear();
+            vector<string> v(2);
             // cout << temp << endl;
             tr(temp, x){
                 if(x == '/'){
                     shift = 1;
                 }else{
-                    arr[i].l[shift].pb(x);
+                    v[shift].pb(x);
                 }
             }
-            arr[i].p = stoi(arr[i].l[1]);
+            arr[i].l = v[0];
+            arr[i].p = stoi(v[1]);
             // error(arr[i].p);
         }
-        sort(arr, arr + N - 1, compare);
+        sort(arr, arr + N, compare); // Made a mistake here
         
         build();
         trav(0, N);
