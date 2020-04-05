@@ -1,2 +1,10 @@
 # Competitive Coding
-* Contains my solutions to the questions I solved since Feb'19
+ * CodeChef     :   92  
+ * CodeForces   :   40  
+ * AtCoder      :   6  
+ * Leetcode     :   4  
+ * GOOGLE       :   2  
+ * SPOJ         :   31  
+ * TopCoder     :   5  
+ * UVa          :   1  
+ * Total        :   181
