@@ -1,10 +1,10 @@
 # Competitive Coding
  * CodeChef     :   92  
- * CodeForces   :   40  
+ * CodeForces   :   37  
  * AtCoder      :   6  
- * Leetcode     :   4  
+ * Leetcode     :   6  
  * GOOGLE       :   2  
  * SPOJ         :   31  
  * TopCoder     :   5  
  * UVa          :   1  
- * Total        :   181
+ * Total        :   180
