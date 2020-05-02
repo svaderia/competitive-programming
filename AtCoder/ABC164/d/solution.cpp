@@ -4,9 +4,7 @@ using namespace __gnu_pbds;
 using namespace std;
 
 typedef long long int lli;
-#define int lli
 typedef pair<int, int> pii;
-typedef pair<lli, lli> pll;
 typedef vector<int> vi;
 typedef vector<lli> vli;
 typedef vector<pii> vii;
@@ -44,43 +42,38 @@ template <class T>  inline void smax(T &x,T y){ x = max((x), (y));}
 template <class T>  inline void smin(T &x,T y){ x = min((x), (y));}
 
 
-signed main(){
+int main(){
     // #ifndef ONLINE_JUDGE
 	// 	freopen("test", "r", stdin);
 	// #endif
     fastio;
     
-    int N;
-    cin >> N;
+    string S;
+    cin >> S;
+    // reverse(all(S));
 
-    vii a(N);
-    rep(i, N){
-        cin >> a[i].first;
-        a[i].second = i + 1;
-    } 
-
-    vector<vli> dp(N + 5, vli(N + 5, 0));
-
-    //dp[curr_index][how_many_in_left];
-
-    sort(all(a), greater<pii>());
-
-    repA(i, 1, N){
-        repA(j, 0, i - 1){
-            int L = j;
-            int R = i - 1 - j;
-            smax(dp[L + 1][R], dp[L][R] + abs(L + 1 - a[i - 1].second)*a[i - 1].first);
-            R = j;
-            L = i - 1 - j;
-            smax(dp[L][R + 1], dp[L][R] + abs(N - R - a[i - 1].second)*a[i - 1].first);
+    lli md = 2019;
+    lli r = 0;
+    vi dp(md, 0);
+    lli ans = 0;
+    dp[S[0] - '0'] = 1;
+    int N = (int) S.size();
+    repA(i, 1, N - 1){
+        vi tdp(md, 0);
+        tdp[S[i] - '0'] = 1;
+        rep(j, md){
+            if(dp[j] > 0){
+                lli rem = (10LL * j + S[i] - '0') % md;
+                if(rem == r) ans += dp[j];
+                tdp[rem] += dp[j];
+            }
+        }
+        rep(j, md){
+            dp[j] = tdp[j];
         }
     }
 
-    lli ans = 0;
-    rep(i, N + 1){
-        smax(ans, dp[i][N - i]);
-    }
-
     cout << ans << endl;
+
     return 0;
 }
