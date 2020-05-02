@@ -43,7 +43,7 @@ template <class T>  inline void smin(T &x,T y){ x = min((x), (y));}
 
 
 int main(){
-    #ifndef ONLINE_JUDGE
+    #ifdef DEBUG
 		freopen("test", "r", stdin);
 	#endif
     fastio;
