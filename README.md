@@ -2,11 +2,11 @@
 |Online Judge|Solved|
 |------ | ------|
 |CodeChef | 93 |  
-|CodeForces | 47 |  
+|CodeForces | 48 |  
 |SPOJ | 35 |  
-|AtCoder | 32 |  
+|AtCoder | 38 |  
 |Leetcode | 30 |  
 |GOOGLE | 2 |  
 |TopCoder | 5 |  
 |UVa | 3 |  
-|Total | 247 |
+|Total | 254 |
