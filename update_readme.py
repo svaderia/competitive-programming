@@ -16,7 +16,7 @@ def get_table(name, count):
 def main():
     args = sys.argv
     sol = (args[-1] == "solved")
-    folders = ["CodeChef", "CodeForces", "SPOJ", "AtCoder", "Leetcode", "GOOGLE", "TopCoder", "UVa"]
+    folders = ["CodeChef", "CodeForces", "SPOJ", "AtCoder", "Leetcode", "TopCoder", "UVa"]
     # if(sol) : folders.append("PEuler")
     base = "/Users/svaderia/Shyamal/GitHub/Competitive-Coding"
     count = [int(subprocess.check_output("find {} -iname solution.* | wc -l".format(os.path.join(base, f)), shell=True)) for f in folders]
