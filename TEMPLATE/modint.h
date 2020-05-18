@@ -1,6 +1,14 @@
 #include <bits/stdc++.h>
 using namespace std;
 const long long mod = 1000000007; 
+typedef long long ll;
+
+ll euclid(ll a, ll b, ll &x, ll &y) {
+	if (b) { ll d = euclid(b, a % b, y, x);
+		return y -= a/b * x, d; }
+	return x = 1, y = 0, a;
+}
+
 struct modint{
 	long long a;
  
@@ -16,7 +24,7 @@ struct modint{
 	bool operator!=(const modint &x) const{ return a != x.a; }
  
 	modint operator-() const{ return modint(a ? (mod - a) : 0); }
-	modint operator~() const{ return pow(mod - 2); }
+	modint operator~() const{ return invert(*this); }
  
 	modint operator+(const modint &x) const{ return modint(*this) += x; }
 	modint operator-(const modint &x) const{ return modint(*this) -= x; }
@@ -58,5 +66,10 @@ struct modint{
 			if(x & 1) ret *= tmp;
 		}
 		return ret;
+	}
+
+    modint invert(modint a) const{
+		ll x, y, g = euclid(a.a, mod, x, y);
+		assert(g == 1); return modint((x + mod) % mod);
 	}
 };
