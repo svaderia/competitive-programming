@@ -1,7 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 const long long mod = 1000000007; 
-typedef long long ll;
+typedef long long lli;
+#define ll lli
 
 ll euclid(ll a, ll b, ll &x, ll &y) {
 	if (b) { ll d = euclid(b, a % b, y, x);
