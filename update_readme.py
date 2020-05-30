@@ -19,7 +19,8 @@ def main():
     folders = ["CodeChef", "CodeForces", "SPOJ", "AtCoder", "Leetcode", "TopCoder", "UVa"]
     # if(sol) : folders.append("PEuler")
     base = "/Users/svaderia/Shyamal/GitHub/Competitive-Coding"
-    count = [int(subprocess.check_output("find {} -iname solution.* | wc -l".format(os.path.join(base, f)), shell=True)) for f in folders]
+    
+    count = [int(subprocess.check_output("find -E {} -regex '.*/*solution.(cpp|py)' | wc -l".format(os.path.join(base, f)), shell=True)) for f in folders]
     
     content = "# Competitive Coding\n"
     
