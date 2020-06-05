@@ -1,0 +1,81 @@
+//https://codeforces.com/contest/1363/problem/A
+#include <bits/stdc++.h>
+using namespace std;
+
+typedef long long int lli;
+#define int lli
+typedef pair<int, int> pii;
+typedef vector<int> vi;
+typedef vector<lli> vli;
+typedef vector<pii> vii;
+
+const int MOD	= 1e9 + 7;
+const double PI = acos(-1.0);
+
+#define fastio			ios_base::sync_with_stdio(0);cin.tie(0)
+#define sz(a) int((a).size())
+#define pb push_back
+#define mp make_pair
+#define mt make_tuple
+#define eb emplace_back
+#define all(c) (c).begin(),(c).end()
+#define present(c,x) ((c).find(x) != (c).end())
+#define cpresent(c,x) (find(all(c),x) != (c).end())
+#define rep(i, n)    for(int i = 0; i < (n); ++i)
+#define repA(i, a, n)  for(int i = a; i <= (n); ++i)
+#define repD(i, a, n)  for(int i = a; i >= (n); --i)
+#define endl "\n"
+#define error(x) cerr << #x << " = " << (x) << endl
+#define errorp(p) cerr << #p << " = " << (p.first) << ", " << (p.second) << endl
+
+template<typename T> T gcd(T a, T b){return(b?__gcd(a,b):a);}
+template <typename T> T lcm(T a, T b){return (a*b)/gcd(a,b); }
+
+void solve(){
+    int n, x;
+    cin >> n >> x;
+    int odds= 0;
+    rep(i, n){
+        int temp;
+        cin >> temp;
+        if(temp %2 == 1){
+            odds++;
+        }
+    }
+    int evens = n - odds;
+    if(odds == 0){
+        cout << "No" << endl;
+    }else{
+        x--;
+        odds--;
+        while(odds > 1 && x > 1){
+            x -= 2;
+            odds -= 2;
+        }
+        while(evens > 0 && x > 0){
+            x--;
+            evens--;
+        }
+        if(x == 0){
+            cout << "Yes" << endl;
+        }else{
+            cout << "No" << endl;
+        }
+    }
+}
+
+signed main(){
+    #ifdef DEBUG
+		freopen("test", "r", stdin);
+	#endif
+    fastio;
+    
+    int T;
+    cin >> T;
+
+    while(T-- > 0){
+        solve();
+    }
+
+    return 0;
+}
