@@ -24,9 +24,14 @@ const double PI = acos(-1.0);
 #define repA(i, a, n)  for(int i = a; i <= (n); ++i)
 #define repD(i, a, n)  for(int i = a; i >= (n); --i)
 #define endl "\n"
-#define error(x) cerr << #x << " = " << (x) << endl
 #define errorp(p) cerr << #p << " = " << (p.first) << ", " << (p.second) << endl
-
+#ifdef DEBUG
+#define error(args...) { string _s = #args; replace(_s.begin(), _s.end(), ',', ' '); stringstream _ss(_s); istream_iterator<string> _it(_ss); err(_it, args); }
+void err(istream_iterator<string> it) {it++; cout << endl;}
+template<typename T, typename... Args> void err(istream_iterator<string> it, T a, Args... args) { cerr << " [ "<< *it << " : " << a << " ] "; err(++it, args...); }
+#else
+#define error(args...)
+#endif
 template<typename T> T gcd(T a, T b){return(b?__gcd(a,b):a);}
 template <typename T> T lcm(T a, T b){return (a*b)/gcd(a,b); }
 

@@ -1,6 +1,5 @@
 #include <bits/stdc++.h>
 using namespace std;
-const long long mod = 1000000007; 
 typedef long long lli;
 #define ll lli
 
@@ -10,6 +9,7 @@ ll euclid(ll a, ll b, ll &x, ll &y) {
 	return x = 1, y = 0, a;
 }
 
+template<long long mod = 1000000007>
 struct modint{
 	long long a;
  
@@ -69,8 +69,8 @@ struct modint{
 		return ret;
 	}
 
-    modint invert(modint a) const{
-		ll x, y, g = euclid(a.a, mod, x, y);
+    modint invert(modint z) const{
+		ll x, y, g = euclid(z.a, mod, x, y);
 		assert(g == 1); return modint((x + mod) % mod);
 	}
 };
