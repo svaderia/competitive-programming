@@ -27,14 +27,14 @@ class Refactoring{
     int get_factors(int n, int min){
         int sum = 0;
         int temp = int(ceil( sqrt(n)));
-        for(int i = 2; i < temp; i++){
+        for(int i = min; i < temp; i++){
+            count++;
             if(n % i == 0){
-                if(i >= min){
-                    sum += 1 + get_factors(n/i, i);
-                }
+                sum += 1 + get_factors(n/i, i);
             }
         }
         if(temp * temp == n){
+            count++;
             if(temp >= min)
                 sum += 1;
         }
@@ -42,16 +42,19 @@ class Refactoring{
     }
 
     public:
+    int count;
     int refactor(int n){
-        return get_factors(n, 1);
+        return get_factors(n, 2);
     }
 };
 
 int main(){
     
     int N;
-    cin >> N;
+    // cin >> N;
+    N = 1916006400;
 
     Refactoring r;
     cout << r.refactor(N) << endl;
+    // cout << r.count << endl;
 }
