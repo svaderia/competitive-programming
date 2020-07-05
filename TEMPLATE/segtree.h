@@ -1,6 +1,3 @@
-#include <bits/stdc++.h>
-using namespace std;
-
 //Segment tree operations: Point update and Range Query
 
 typedef long long int lli;

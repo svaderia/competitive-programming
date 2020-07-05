@@ -8,10 +8,10 @@ typedef vector<int> vi;
 typedef vector<lli> vli;
 typedef vector<pii> vii;
 
-const int MOD	= 1e9 + 7;
+const int MOD    = 1e9 + 7;
 const double PI = acos(-1.0);
 
-#define fastio			ios_base::sync_with_stdio(false);cin.tie(0)
+#define fastio            ios_base::sync_with_stdio(false);cin.tie(0)
 #define sz(a) int((a).size())
 #define pb push_back
 #define mp make_pair
@@ -41,8 +41,8 @@ void solve(){
 
 signed main(){
     #ifdef DEBUG
-		freopen("test", "r", stdin);
-	#endif
+        freopen("test", "r", stdin);
+    #endif
     fastio;
     
     int T;
