@@ -48,7 +48,7 @@ signed main(){
     int T;
     cin >> T;
 
-    while(T-- > 0){
+    repA(tc, 1, T){
         solve();
     }
 
