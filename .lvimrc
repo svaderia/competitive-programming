@@ -2,7 +2,7 @@
 iabbrev trmq <ESC>:-1read $CCTEMPLATEPATH/rmq.h<CR>
 iabbrev tdsu <ESC>:-1read $CCTEMPLATEPATH/dsu.h<CR>
 iabbrev tbigint <ESC>:-1read $CCTEMPLATEPATH/bigint.h<CR>
-iabbrev ttemplate <ESC>:-1read $CCTEMPLATEPATH/solution.cpp<CR>37j
+iabbrev ttemplate <ESC>:-1read $CCTEMPLATEPATH/solution.cpp<CR>:38<CR>
 iabbrev tmodint <ESC>:-1read $CCTEMPLATEPATH/modint.h<CR>
 iabbrev tsegtree <ESC>:-1read $CCTEMPLATEPATH/segtree.h<CR>
 iabbrev tsegtreelazy <ESC>:-1read $CCTEMPLATEPATH/segtree_lazy.h<CR>
@@ -11,3 +11,4 @@ iabbrev tpset <ESC>:-1read $CCTEMPLATEPATH/policy_set.h<CR>
 iabbrev tptree <ESC>:-1read $CCTEMPLATEPATH/policy_tree.h<CR>
 iabbrev tprime <ESC>:-1read $CCTEMPLATEPATH/prime.h<CR>
 iabbrev tdivisor <ESC>:-1read $CCTEMPLATEPATH/divisor.h<CR>
+iabbrev tdebug <ESC>:-1read $CCTEMPLATEPATH/debug.h<CR>55j
