@@ -5,6 +5,7 @@ typedef long long int lli;
 #define int lli
 typedef pair<int, int> pii;
 typedef vector<int> vi;
+typedef vector<bool> vb;
 typedef vector<vi> vvi;
 typedef vector<lli> vli;
 typedef vector<pii> vii;
