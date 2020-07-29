@@ -2,6 +2,7 @@ UNSOLVED/
 .vscode/
 *.out
 test
+solution
 DOCS/
 *tcs
 *bin

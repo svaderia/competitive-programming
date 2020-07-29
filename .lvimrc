@@ -1,3 +1,12 @@
+" Compile and run the code inside vim only
+nnoremap <Leader>g :w<CR>:vertical terminal ++shell g++-9 -std=c++17 -Wall -Wextra -Wshadow -Wconversion -O2 -D DEBUG % -o %:r <CR>
+nnoremap <Leader>r :vertical terminal ++shell ./%:r < %:h/test <CR>
+nnoremap <Leader>p :vertical terminal ++shell pbpaste <bar> ./%:r <CR>
+nnoremap <Leader>P :vertical terminal ++shell pbpaste > %:h/test; ./%:r < %:h/test<CR>
+
+" Add some marks in my code base
+nnoremap <Leader>m gg/solve<CR>kme2jms:nohlsearch<CR>
+
 " adding templates for Competitive
 iabbrev trmq <ESC>ma:-1read $CCTEMPLATEPATH/rmq.h<CR>`a
 iabbrev tdsu <ESC>ma:-1read $CCTEMPLATEPATH/dsu.h<CR>`a
@@ -11,4 +20,4 @@ iabbrev tptree <ESC>ma:-1read $CCTEMPLATEPATH/policy_tree.h<CR>`a
 iabbrev tprime <ESC>ma:-1read $CCTEMPLATEPATH/prime.h<CR>`a
 iabbrev tdivisor <ESC>ma:-1read $CCTEMPLATEPATH/divisor.h<CR>`a
 iabbrev tdebug <ESC>ma:-1read $CCTEMPLATEPATH/debug.h<CR>55j`a
-iabbrev ttemplate <ESC>:-1read $CCTEMPLATEPATH/solution.cpp<CR>:38<CR>
+iabbrev ttemplate <ESC>:-1read $CCTEMPLATEPATH/solution.cpp<CR>:40<CR>
