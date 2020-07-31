@@ -2,10 +2,10 @@
 |Online Judge|Solved|
 |------ | ------|
 |CodeChef | 97 |  
-|CodeForces | 105 |  
-|SPOJ | 45 |  
+|CodeForces | 114 |  
+|SPOJ | 47 |  
 |AtCoder | 71 |  
 |Leetcode | 30 |  
 |TopCoder | 5 |  
 |UVa | 3 |  
-|Total | 356 |
+|Total | 367 |
