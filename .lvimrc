@@ -24,3 +24,12 @@ iabbrev tprime <ESC>ma:-1read $CCTEMPLATEPATH/prime.h<CR>`a
 iabbrev tdivisor <ESC>ma:-1read $CCTEMPLATEPATH/divisor.h<CR>`a
 iabbrev tdebug <ESC>ma:-1read $CCTEMPLATEPATH/debug.h<CR>55j`a
 iabbrev ttemplate <ESC>:-1read $CCTEMPLATEPATH/solution.cpp<CR>:40<CR>
+
+" Insert cin for the variables in current line
+nnoremap <Leader>i yyp^cwcin,<ESC>:.s/,/ >>/g<CR>o
+
+" Insert cin for Arrays
+nnoremap <Leader>o yypk^f(lyiworep(i, <ESC>pa){<ESC>jv>^dwicin, <ESC>:.s/(/\[/g<CR>:.s/)/\]/g<CR>:;.s/,/ >>/g<CR>:.s/\[<C-r>0/\[i/g<CR><ESC>o}<ESC>o
+
+" Change to single TC
+nnoremap <Leader>s mt's/fastio<CR>2jd/return<CR>kosolve();<CR><ESC>:nohlsearch<CR>`t
