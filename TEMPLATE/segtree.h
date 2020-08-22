@@ -1,8 +1,5 @@
 //Segment tree operations: Point update and Range Query
 
-typedef long long int lli;
-typedef vector<lli> vli;
-
 struct node{
     lli data;
 
@@ -40,7 +37,7 @@ void build(int id = 1, int l = 0, int r = N){
 
 //Complexity: O(log n)
 void update(int p, int y, int id = 1, int l = 0, int r = N){
-    if(r - l < 2){ 
+    if(r - l < 2){
         //base case : leaf node information to be stored here
         seg[id].assign(y);
         return;
