@@ -1,11 +1,12 @@
 # Competitive Coding
 |Online Judge|Solved|
 |------ | ------|
-|CodeChef | 105 |  
-|CodeForces | 125 |  
-|SPOJ | 52 |  
-|AtCoder | 83 |  
+|CodeChef | 107 |  
+|CodeForces | 135 |  
+|SPOJ | 54 |  
+|AtCoder | 88 |  
 |Leetcode | 30 |  
 |TopCoder | 5 |  
 |UVa | 3 |  
-|Total | 403 |
+|Other | 4 |  
+|Total | 426 |

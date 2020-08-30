@@ -6,7 +6,6 @@ import subprocess
 import os
 import sys
 
-
 def get_string(name, count):
     return " * {} :   {}".format(name + " " * (12 - len(name)), count)
 
@@ -16,14 +15,14 @@ def get_table(name, count):
 def main():
     args = sys.argv
     sol = (args[-1] == "solved")
-    folders = ["CodeChef", "CodeForces", "SPOJ", "AtCoder", "Leetcode", "TopCoder", "UVa"]
+    folders = ["CodeChef", "CodeForces", "SPOJ", "AtCoder", "Leetcode", "TopCoder", "UVa", "Other"]
     # if(sol) : folders.append("PEuler")
     base = "/Users/svaderia/Shyamal/GitHub/Competitive-Coding"
-    
+
     count = [int(subprocess.check_output("find -E {} -regex '.*/*solution.(cpp|py)' | wc -l".format(os.path.join(base, f)), shell=True)) for f in folders]
-    
+
     content = "# Competitive Coding\n"
-    
+
     if(sol):
         content += "  \n".join([get_string(folders[x], count[x]) for x in range(len(folders))])
         content += "  \n{}".format(get_string("Total", sum(count)))
@@ -35,7 +34,6 @@ def main():
         content += "  \n{}".format(get_table("Total", sum(count)))
         with open(os.path.join(base, "README.md"), "w") as f:
             f.write(content)
-
 
 if __name__ == "__main__":
     main()
