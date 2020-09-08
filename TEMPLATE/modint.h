@@ -1,12 +1,10 @@
-#define ll lli
-
-ll euclid(ll a, ll b, ll &x, ll &y) {
-    if (b) { ll d = euclid(b, a % b, y, x);
+long long euclid(long long a, long long b, long long &x, long long &y) {
+    if (b) { long long d = euclid(b, a % b, y, x);
         return y -= a/b * x, d; }
     return x = 1, y = 0, a;
 }
 
-const ll mod = 1000000007;
+const long long mod = 1000000007;
 /* template<long long mod = 1000000007> */
 struct modint{
     long long a;
@@ -69,7 +67,14 @@ struct modint{
     }
 
     modint invert(modint z) const{
-        ll x, y, g = euclid(z.a, mod, x, y);
+        long long x, y, g = euclid(z.a, mod, x, y);
         assert(g == 1); return modint((x + mod) % mod);
     }
 };
+
+// for debug
+string to_string(modint z){
+    return to_string(z.a);
+}
+
+typedef vector<modint> vm;
