@@ -1,73 +1,37 @@
-//Segment tree operations: Point update and Range Query
-
 struct node{
     lli data;
-
-    void assign(lli val){
-        data = val;
-    }
+    node(lli val) : data(val) {}
 }typedef node;
 
-vector<node> seg;
-int N;
-vli arr;
+struct SegTree{
+    typedef node T;
 
-//Complexity: O(1)
-//Stores what info. segment[i..j] should store
-node merge(node &left, node &right){
-    node id;
-    id.data = left.data + right.data;
-    return id;
-}
+    T unit = T(INT_MIN);
 
-//Complexity: O(n)
-void build(int id = 1, int l = 0, int r = N){
-    if(r - l < 2){
-        //base case : leaf node information to be stored here
-        seg[id].assign(arr[l]);
-        return;
+    T merge(T a, T b) {
+        return T(max(a.data, b.data));
+    } // any associatinve function
+
+    vector<T> s; int n;
+    SegTree(int nn, T def) : s(2 * nn, def), n(nn) {}
+    SegTree(int nn) : s(2 * nn, unit), n(nn) {}
+
+    void build(){
+        repD(pos, n - 1, 1)
+            s[pos] = merge(s[2 * pos], s[2 * pos + 1]);
     }
 
-    int mid = (l + r) / 2;
-    int left = 2 * id, right = left + 1;
-    build(left, l, mid);
-    build(right, mid, r);
-    seg[id] = merge(seg[left], seg[right]);
-}
-
-//Complexity: O(log n)
-void update(int p, int y, int id = 1, int l = 0, int r = N){
-    if(r - l < 2){
-        //base case : leaf node information to be stored here
-        seg[id].assign(y);
-        return;
+    void update(int pos, T val){
+        for(s[pos += n] = val; pos /= 2;)
+            s[pos] = merge(s[2 * pos], s[2 * pos + 1]);
     }
 
-    int mid = (l + r) / 2;
-    int left = 2 * id, right = left + 1;
-    if(p < mid){
-        update(p, y, left, l, mid);
-    }else{
-        update(p, y, right, mid, r);
+    T query(int l, int r){ // [l, r)
+        T vl = unit, vr = unit;
+        for(l += n, r += n; l < r; l /= 2, r /= 2){
+            if(l % 2) vl = merge(vl, s[l++]);
+            if(r % 2) vr = merge(s[--r], vr);
+        }
+        return merge(vl, vr);
     }
-    seg[id] = merge(seg[left], seg[right]);
-}
-
-//Complexity: O(log n)
-node query(int x, int y, int id = 1, int l = 0, int r = N){
-    if(r <= x || y <= l){ // No overlap, return useless
-        node id;
-        id.assign(0);
-        return id;
-    }
-
-    if(x <= l && r <= y){ // overlap
-        return seg[id];
-    }
-
-    int mid = (l + r) / 2;
-    int left = 2 * id, right = left + 1;
-    node a = query(x,  y, left, l, mid);
-    node b = query(x, y, right, mid, r);
-    return merge(a, b);
-}
+};
