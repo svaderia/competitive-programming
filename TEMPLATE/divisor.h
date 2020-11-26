@@ -1,14 +1,13 @@
-void get_divisors(int n){
+void get_divisors(int n, vi &d){
     int temp = int(ceil( sqrt(n)));
     for(int i = 2; i < temp; i++){
         if(n % i == 0){
-            cout << i;
-            cout << n/i;
+            d.pb(i);
+            d.pb(n / i);
         }
     }
     if(temp * temp == n){
-        cout << temp;
+        d.pb(temp);
     }
-    
-}
 
+}
