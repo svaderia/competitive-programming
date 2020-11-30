@@ -12,8 +12,8 @@ typedef vector<pii> vii;
 
 const int MOD   = 1e9 + 7;
 const double PI = acos(-1.0);
-const int xd[4] = {1, 0, -1, 0}, yd[4] = {0, 1, 0, -1};
-const int INF   = 1e18;
+const int dx[4] = {1, 0, -1, 0}, dy[4] = {0, 1, 0, -1};
+const lli INF   = 1e18;
 
 #define fastio            ios_base::sync_with_stdio(false);cin.tie(0)
 #define sz(a) int((a).size())
