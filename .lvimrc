@@ -8,28 +8,34 @@ nnoremap <Leader>p :vertical terminal ++shell pbpaste <bar> ./%:r <CR>
 nnoremap <Leader>P :vertical terminal ++shell pbpaste > %:h/test; ./%:r < %:h/test<CR>
 
 " Add some marks in my code base
-nnoremap <Leader>m gg/solve<CR>kme2jms:nohlsearch<CR>
+nnoremap <Leader>m :38<CR>me/void solve<CR>GNjms:nohlsearch<CR>zz
 
 " adding templates for Competitive
-iabbrev trmq <ESC>ma:-1read $CCTEMPLATEPATH/rmq.h<CR>`a
-iabbrev tdsu <ESC>ma:-1read $CCTEMPLATEPATH/dsu.h<CR>`a
-iabbrev tbigint <ESC>ma:-1read $CCTEMPLATEPATH/bigint.h<CR>`a
-iabbrev tmodint <ESC>ma:-1read $CCTEMPLATEPATH/modint.h<CR>`a
-iabbrev tsegtree <ESC>ma:-1read $CCTEMPLATEPATH/segtree.h<CR>`a
-iabbrev tsegtreelazy <ESC>ma:-1read $CCTEMPLATEPATH/segtree_lazy.h<CR>`a
-iabbrev tcomb <ESC>ma:-1read $CCTEMPLATEPATH/combination.h<CR>`a
-iabbrev tpset <ESC>ma:-1read $CCTEMPLATEPATH/policy_set.h<CR>`a
-iabbrev tptree <ESC>ma:-1read $CCTEMPLATEPATH/policy_tree.h<CR>`a
-iabbrev tprime <ESC>ma:-1read $CCTEMPLATEPATH/prime.h<CR>`a
-iabbrev tdivisor <ESC>ma:-1read $CCTEMPLATEPATH/divisor.h<CR>`a
-iabbrev tdebug <ESC>ma:-1read $CCTEMPLATEPATH/debug.h<CR>55j`a
+iabbrev trmq <ESC>ma'e:-1read $CCTEMPLATEPATH/rmq.h<CR>`a
+iabbrev tdsu <ESC>ma'e:-1read $CCTEMPLATEPATH/dsu.h<CR>`a
+iabbrev tbigint <ESC>ma'e:-1read $CCTEMPLATEPATH/bigint.h<CR>`a
+iabbrev tmodint <ESC>ma'e:-1read $CCTEMPLATEPATH/modint.h<CR>`a
+iabbrev tsegtree <ESC>ma'e:-1read $CCTEMPLATEPATH/segtree.h<CR>`a
+iabbrev tsegtreelazy <ESC>ma'e:-1read $CCTEMPLATEPATH/segtree_lazy.h<CR>`a
+iabbrev tcomb <ESC>ma'e:-1read $CCTEMPLATEPATH/combination.h<CR>`a
+iabbrev tpset <ESC>ma'e:-1read $CCTEMPLATEPATH/policy_set.h<CR>`a
+iabbrev tptree <ESC>ma'e:-1read $CCTEMPLATEPATH/policy_tree.h<CR>`a
+iabbrev tprime <ESC>ma'e:-1read $CCTEMPLATEPATH/prime.h<CR>`a
+iabbrev tdivisor <ESC>ma'e:-1read $CCTEMPLATEPATH/divisor.h<CR>`a
+iabbrev tdebug <ESC>ma'e:-1read $CCTEMPLATEPATH/debug.h<CR>`a
+iabbrev tfunc <ESC>ma'e:-1read $CCTEMPLATEPATH/y_combinator.h<CR>`ak
+iabbrev tgraph <ESC>ma'e:-1read $CCTEMPLATEPATH/graph.h<CR>`ak
+iabbrev ttarjan <ESC>ma'e:-1read $CCTEMPLATEPATH/tarjan.h<CR>:-1read $CCTEMPLATEPATH/graph.h<CR>`ak
 iabbrev ttemplate <ESC>:-1read $CCTEMPLATEPATH/solution.cpp<CR>:40<CR>
 
 " Insert cin for the variables in current line
-nnoremap <Leader>i yyp^cwcin,<ESC>:.s/,/ >>/g<CR>o
+nnoremap <Leader>i yyp^cwcin,<ESC>:.s/,/ >>/g<CR><ESC>:nohlsearch<CR>o
 
 " Insert cin for Arrays
-nnoremap <Leader>o yypk^f(lyiworep(i, <ESC>pa){<ESC>jv>^dwicin, <ESC>:.s/(/\[/g<CR>:.s/)/\]/g<CR>:;.s/,/ >>/g<CR>:.s/\[<C-r>0/\[i/g<CR><ESC>o}<ESC>o
+nnoremap <Leader>o yypk^f(lyi(orep(i, <ESC>pa){<ESC>jv>^df icin, <ESC>:.s/(/\[/g<CR>:.s/)/\]/g<CR>:;.s/,/ >>/g<CR>:.s/\[<C-r>0/\[i/g<CR><ESC>o}<ESC>o
 
 " Change to single TC
 nnoremap <Leader>s mt's/fastio<CR>2jd/return<CR>kosolve();<CR><ESC>:nohlsearch<CR>`t
+
+" I/O for USACO
+nnoremap <Leader>a mt's/fastio<CR>:-1read $CCTEMPLATEPATH/usaco.h<CR>:%s/problemname/\=expand('%:p:h:t')/g<CR>:nohlsearch<CR>`t

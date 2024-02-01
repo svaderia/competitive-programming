@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-#include <ext/pb_ds/assoc_container.hpp> 
+#include <ext/pb_ds/assoc_container.hpp>
 using namespace __gnu_pbds;
 using namespace std;
 
@@ -41,13 +41,12 @@ template<typename T>T mod_inverse(T a, T n){T x,y,z=0;T d=extended_euclid(a,n,x,
 template <class T>  inline void smax(T &x,T y){ x = max((x), (y));}
 template <class T>  inline void smin(T &x,T y){ x = min((x), (y));}
 
-
 int main(){
     #ifdef DEBUG
 		freopen("test", "r", stdin);
 	#endif
     fastio;
-    
+
     int N;
     cin >> N;
 
@@ -80,7 +79,7 @@ int main(){
                 start = x;
                 vis[x] = true;
             }
-        } 
+        }
     }
     rep(i, N + 1){
         cout << ans[i] << " ";
