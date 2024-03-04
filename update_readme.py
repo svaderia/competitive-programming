@@ -5,6 +5,8 @@
 import subprocess
 import os
 import sys
+from rich.console import Console
+from rich.table import Table
 
 def get_string(name, count):
     return " * {} :   {}".format(name + " " * (12 - len(name)), count)
@@ -20,14 +22,20 @@ def main():
     base = "/Users/svaderia/Shyamal/GitHub/Competitive-Coding"
     readme_path = os.path.join(base, "README.md")
 
-    count = [int(subprocess.check_output("find -E {} -regex '.*/*solution.(cpp|py)' | wc -l".format(os.path.join(base, f)), shell=True)) for f in folders]
+    count = {f : int(subprocess.check_output("find -E {} -regex '.*/*solution.(cpp|py)' | wc -l".format(os.path.join(base, f)), shell=True)) for f in folders}
 
     content = ""
 
     if(sol):
-        content += "  \n".join([get_string(folders[x], count[x]) for x in range(len(folders))])
-        content += "  \n{}".format(get_string("Total", sum(count)))
-        print(content)
+        total_solved = str(sum(count.values()))
+        table = Table(title="Solved Problems", show_footer=True)
+        table.add_column("Online Judge", "Total", style="italic")
+        table.add_column("Solved", total_solved, style="cyan")
+
+        for f in folders:
+            table.add_row(f, str(count[f]))
+
+        Console().print(table)
     else:
         with open(readme_path, "r") as f:
             content = f.read()
@@ -36,7 +44,7 @@ def main():
         content += "# Competitive Coding\n"
         content += "|Online Judge|Solved|\n"
         content += "|------ | ------|\n"
-        content += "  \n".join([get_table(folders[x], count[x]) for x in range(len(folders))])
+        content += "  \n".join([get_table(f, count[f]) for f in folders])
         content += "  \n{}".format(get_table("Total", sum(count)))
         with open(readme_path, "w") as f:
             f.write(content)
