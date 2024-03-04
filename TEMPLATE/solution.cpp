@@ -31,6 +31,7 @@ const lli INF   = 1e18;
 #define rep(i, n)    for(int i = 0; i < (n); ++i)
 #define repA(i, a, n)  for(int i = a; i <= (n); ++i)
 #define repD(i, a, n)  for(int i = a; i >= (n); --i)
+// Remove this when it's an interactive problem
 #define endl "\n"
 #define spc " "
 template<typename T> T gcd(T a, T b){return(b?__gcd(a,b):a);}
