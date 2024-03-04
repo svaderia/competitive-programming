@@ -1,5 +1,5 @@
 " Set makeprg with required warning flags for CP
-set makeprg=g++-9\ -std=c++17\ -Wall\ -Wextra\ -Wshadow\ -Wconversion\ -O2\ -DDEBUG\ %\ -o\ %:r
+set makeprg=g++-13\ -std=c++17\ -Wall\ -Wextra\ -Wshadow\ -Wconversion\ %\ -o\ %:r
 
 " Compile and run the code inside vim only
 nnoremap <Leader>g :w<CR>:Make<CR>
@@ -8,7 +8,9 @@ nnoremap <Leader>p :vertical terminal ++shell pbpaste <bar> ./%:r <CR>
 nnoremap <Leader>P :vertical terminal ++shell pbpaste > %:h/test; ./%:r < %:h/test<CR>
 
 " Add some marks in my code base
-nnoremap <Leader>m :38<CR>me/void solve<CR>GNjms:nohlsearch<CR>zz
+" This hardcoding of mark is bad at line 38. It assumes my imports will not be
+" there. let's change it.
+nnoremap <Leader>m :/void solve<CR>GNjmskkme`s:nohlsearch<CR>zz
 
 " adding templates for Competitive
 iabbrev trmq <ESC>ma'e:-1read $CCTEMPLATEPATH/rmq.h<CR>`a
