@@ -15,5 +15,5 @@
 |AtCoder | 120 |  
 |Leetcode | 30 |  
 |Other | 180 |  
-|15195 | 32 |  
-|Total | 755 |
+|15195 | 25 |  
+|Total | 748 |
