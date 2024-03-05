@@ -25,9 +25,9 @@ def main():
     count = {f : int(subprocess.check_output("find -E {} -regex '.*/*solution.(cpp|py)' | wc -l".format(os.path.join(base, f)), shell=True)) for f in folders}
 
     content = ""
+    total_solved = str(sum(count.values()))
 
     if(sol):
-        total_solved = str(sum(count.values()))
         table = Table(title="Solved Problems", show_footer=True)
         table.add_column("Online Judge", "Total", style="italic")
         table.add_column("Solved", total_solved, style="cyan")
@@ -45,7 +45,7 @@ def main():
         content += "|Online Judge|Solved|\n"
         content += "|------ | ------|\n"
         content += "  \n".join([get_table(f, count[f]) for f in folders])
-        content += "  \n{}".format(get_table("Total", sum(count)))
+        content += "  \n{}".format(get_table("Total", total_solved))
         with open(readme_path, "w") as f:
             f.write(content)
 
