@@ -5,6 +5,7 @@
 - [ ] Have a commentary (maybe AI generated, so can be wrong) on a solution of the problem. This combined with the tags of problem can become very helpful to remember stuff latter on.
 - [ ] Link each contest to it's link, like every problem needs to be linked to the website.
 - [ ] Remove unused macros or constants from the solution files. This will make it less bloated and easy to understand. Technically if I can have as minimal of templeting as possible, it will help.
+- [ ] Solve CSES again to get back into the zone
 
 # Competitive Coding
 |Online Judge|Solved|
