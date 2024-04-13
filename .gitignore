@@ -3,6 +3,7 @@ UNSOLVED/
 *.out
 test
 solution
+new_solution
 DOCS/
 *tcs
 *bin

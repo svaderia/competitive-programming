@@ -48,6 +48,10 @@ inline bool inside(int x, int y){
     return true;
 }
 
+/* we are effectively trying to prune the search as much as possible.
+ * Here is a nice doc that explains it for this problem :
+ *  https://usaco.guide/problems/cses-1625-grid-paths/solution
+ */
 void recur(int step, int x, int y){
     /* rep(i, 4){ */
     /*     if(inside(x + dx[i], y + dy[i]) && !visited[x + dx[i]][y + dy[i]]) pos[i] = true; */
