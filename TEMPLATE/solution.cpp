@@ -1,3 +1,4 @@
+// clang-format off
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -36,6 +37,7 @@ const lli INF   = 1e18;
 #define spc " "
 template<typename T> T gcd(T a, T b){return(b?__gcd(a,b):a);}
 template <typename T> T lcm(T a, T b){return (a*b)/gcd(a,b); }
+// clang-format on
 
 void solve(){
 

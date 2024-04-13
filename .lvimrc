@@ -3,6 +3,8 @@ set makeprg=g++-13\ -std=c++17\ -Wall\ -Wextra\ -Wshadow\ -Wconversion\ %\ -o\ %
 
 " Compile and run the code inside vim only
 nnoremap <Leader>g :w<CR>:Make<CR>
+nnoremap <Leader>u :vsplit %:h/test<CR>
+nnoremap <Leader>f :!clang-format -i %:p<CR>
 nnoremap <Leader>r :vertical terminal ++shell ./%:r < %:h/test <CR>
 nnoremap <Leader>p :vertical terminal ++shell pbpaste <bar> ./%:r <CR>
 nnoremap <Leader>P :vertical terminal ++shell pbpaste > %:h/test; ./%:r < %:h/test<CR>
