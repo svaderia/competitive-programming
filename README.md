@@ -7,6 +7,8 @@
 - [ ] Link each contest to it's link, like every problem needs to be linked to the website.
 - [ ] Remove unused macros or constants from the solution files. This will make it less bloated and easy to understand. Technically if I can have as minimal of templeting as possible, it will help.
 - [ ] Solve CSES again to get back into the zone
+- [ ] Investigate why the compile takes so much time
+- [ ] Explore the cf-tool and get something simple like it
 
 # Competitive Coding
 |Online Judge|Solved|
