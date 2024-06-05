@@ -19,7 +19,8 @@ def main():
     sol = (args[-1] == "solved")
     folders = ["CodeChef", "CodeForces", "SPOJ", "AtCoder", "Leetcode", "Other", "15195"]
     # if(sol) : folders.append("PEuler")
-    base = "/Users/svaderia/Shyamal/GitHub/Competitive-Coding"
+    # TODO: make this a ENV variable
+    base = "/Users/svaderia/Shyamal/GitHub/competitive-programming"
     readme_path = os.path.join(base, "README.md")
 
     count = {f : int(subprocess.check_output("find -E {} -regex '.*/*solution.(cpp|py)' | wc -l".format(os.path.join(base, f)), shell=True)) for f in folders}
@@ -40,8 +41,8 @@ def main():
         with open(readme_path, "r") as f:
             content = f.read()
 
-        content = content.split("# Competitive Coding\n")[0]
-        content += "# Competitive Coding\n"
+        content = content.split("# Competitive Programming\n")[0]
+        content += "# Competitive Programming\n"
         content += "|Online Judge|Solved|\n"
         content += "|------ | ------|\n"
         content += "  \n".join([get_table(f, count[f]) for f in folders])
