@@ -23,7 +23,7 @@ def main():
     base = "/Users/svaderia/Shyamal/GitHub/competitive-programming"
     readme_path = os.path.join(base, "README.md")
 
-    count = {f : int(subprocess.check_output("find -E {} -regex '.*/*solution.(cpp|py)' | wc -l".format(os.path.join(base, f)), shell=True)) for f in folders}
+    count = {f : int(subprocess.check_output("find -E {} -regex '.*/solution\.(cpp|py)' | wc -l".format(os.path.join(base, f)), shell=True)) for f in folders}
 
     content = ""
     total_solved = str(sum(count.values()))
