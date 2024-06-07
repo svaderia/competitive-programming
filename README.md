@@ -10,14 +10,14 @@
 - [ ] Investigate why the compile takes so much time
 - [ ] Explore the cf-tool and get something simple like it
 
-# Competitive Coding
+# Competitive Programming
 |Online Judge|Solved|
 |------ | ------|
 |CodeChef | 129 |  
-|CodeForces | 233 |  
+|CodeForces | 239 |  
 |SPOJ | 61 |  
-|AtCoder | 120 |  
+|AtCoder | 119 |  
 |Leetcode | 30 |  
-|Other | 232 |  
+|Other | 193 |  
 |15195 | 38 |  
-|Total | 843 |
+|Total | 809 |
