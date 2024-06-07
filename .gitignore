@@ -3,7 +3,8 @@ UNSOLVED/
 *.out
 test
 solution
-new_solution
+new_solution*
+!*.cpp
 DOCS/
 *tcs
 *bin
