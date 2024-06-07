@@ -1,3 +1,5 @@
+// Reference : https://codeforces.com/blog/entry/78931
+// Since I don't remember this much, I should reevaluate and write it myself :)
 template<typename T> struct rmq {
     vector<T> v;
     int n; static const int b = 30;
