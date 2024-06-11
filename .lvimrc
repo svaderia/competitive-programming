@@ -13,7 +13,7 @@ nnoremap <Leader>P :vertical terminal ++shell pbpaste > %:h/test; ./%:r < %:h/te
 " Add some marks in my code base
 " This hardcoding of mark is bad at line 38. It assumes my imports will not be
 " there. let's change it.
-nnoremap <Leader>m :/void solve<CR>GNjmskkme`s:nohlsearch<CR>zz
+nnoremap <Leader>m :/void solve<CR>GNjmskkkme`s:nohlsearch<CR>zz
 
 " adding templates for Competitive
 iabbrev trmq <ESC>ma'e:-1read $CCTEMPLATEPATH/rmq.h<CR>`a
