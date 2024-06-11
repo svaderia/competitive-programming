@@ -14,10 +14,10 @@
 |Online Judge|Solved|
 |------ | ------|
 |CodeChef | 129 |  
-|CodeForces | 239 |  
+|CodeForces | 240 |  
 |SPOJ | 61 |  
 |AtCoder | 119 |  
 |Leetcode | 30 |  
-|Other | 193 |  
+|Other | 198 |  
 |15195 | 38 |  
-|Total | 809 |
+|Total | 815 |
