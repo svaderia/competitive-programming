@@ -13,6 +13,7 @@ typedef vector<pii> vii;
 
 const int MOD   = 1e9 + 7;
 const double PI = acos(-1.0);
+const int dx[4] = {1, 0, -1, 0}, dy[4] = {0, 1, 0, -1};
 const lli INF   = 1e18;
 
 #define fastio            ios_base::sync_with_stdio(false);cin.tie(0)
@@ -95,95 +96,30 @@ template<class H, class... T> void DBG(H h, T... t) {
     #define dbg(...) 0
 #endif
 
-
-int recur(int next_num, int digit_left, vvi &memo){
-    if(digit_left == 0){
-        return 1;
-    }
-    if(memo[next_num][digit_left] != -1){
-        return memo[next_num][digit_left];
-    }
-
-    int ans = 0;
-    rep(i, 10){
-        if(i != next_num){
-            ans += recur(i, digit_left - 1, memo);
-        }
-    }
-
-    return memo[next_num][digit_left] = ans;
-}
-
-
 void solve(){
-    /* const int n = 19; // basically the number can be maximum 19 digit */
+    int n;
+    cin >> n;
 
-    int a, b;
-    cin >> a >> b;
-
-    vvi memo(10, vi(21, -1));
-
-    int da = 0;
-    int temp = a;
-    while(temp > 0){
-        da++;
-        temp /= 10;
+    vi a(n);
+    rep(i, n){
+        cin >> a[i];
     }
 
-    int db = 0;
-    temp = b;
-    while(temp > 0){
-        db++;
-        temp /= 10;
+    multiset<int> st;
+
+    rep(i, n){
+        auto it = st.lower_bound(a[i]);
+        if(it != st.end()){
+            st.erase(it);
+        }
+        st.insert(a[i]);
+        
+        dbg(st);
+
     }
 
-    auto lower = [&] (int x) -> int {
-        if(x == 0){
-            return 0;
-        }
+    cout << sz(st) << endl;
 
-        vi dig;
-        temp = x;
-        while(temp > 0){
-            dig.pb(temp % 10);
-            temp = temp/10;
-        }
-        int dx = sz(dig);
-        int ans = 1;
-
-        rep(d, dx - 1){
-            repA(num, 1, 9){
-                ans += recur(num, d, memo);
-            }
-        }
-        dbg(ans);
-
-        dbg(dig);
-        repD(d, sz(dig) - 1, 0){
-            rep(num, dig[d]){
-                if(d == sz(dig) - 1 && num == 0){
-                    continue;
-                }
-                if(d < sz(dig) - 1 && num == dig[d + 1]){
-                    continue;
-                }
-
-                dbg(d, num, recur(num, d, memo));
-                ans += recur(num, d, memo);
-            }
-            if(d < sz(dig) - 1 && dig[d] == dig[d + 1]){
-                break;
-            }
-        }
-        dbg(ans);
-        return ans;
-
-    };
-
-    /* cout << lower(a) << endl; */
-    /* cout << lower(b + 1) << endl; */
-
-    cout << lower(b + 1) - lower(a) << endl;
 }
 
 signed main(){
