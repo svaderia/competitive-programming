@@ -1,31 +1,20 @@
 // 0-based indexing assumed
 
-struct UnionFind {
-    int n, set_size;
-    vi parent, rank;
+struct dsu {
+    vi p;
 
-    UnionFind(int a) : n(a), set_size(n), parent(n), rank(n, 1) {
-        rep(i, n) parent[i]=i;
+    dsu(int _n) { p.rsz(_n, -1); }
+
+    int find(int x) { return p[x] < 0 ? x : p[x] = find(p[x]); }
+
+    int sameSet(int x, int y) { return find(x) == find(y); }
+    
+    int size(int x){ return -p[find(x)]; }
+
+    int unite(int x, int y) {
+        x = find(x), y = find(y);
+        if (x == y) return 0;
+        if (p[y] > p[x]) swap(x, y);
+        p[y] += p[x]; p[x] = y; return 1;
     }
-
-    int find(int x) {
-        if (x != parent[x]) return parent[x] = find(parent[x]);
-        return x;
-    }
-
-    bool merge(int x, int y) {
-        int xroot = find(x), yroot = find(y);
-        if(xroot == yroot) return false;
-        if (rank[xroot] < rank[yroot]) swap(xroot, yroot);
-        parent[yroot] = xroot;
-        rank[xroot] += rank[yroot];
-        set_size -= 1;
-        return true;
-    }
-
-    bool same(int x, int y){
-        return find(x) == find(y);
-    }
-
-    int size() { return set_size; }
 };
