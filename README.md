@@ -6,9 +6,12 @@
 - [ ] Better than the commentry, write the things you know about a problem on your webstie. For example, Binary search and ternary search. PBDS, etc. This is your own notes on how to do something.
 - [ ] Link each contest to it's link, like every problem needs to be linked to the website.
 - [ ] Remove unused macros or constants from the solution files. This will make it less bloated and easy to understand. Technically if I can have as minimal of templeting as possible, it will help.
-- [ ] Solve CSES again to get back into the zone
-- [ ] Investigate why the compile takes so much time
 - [ ] Explore the cf-tool and get something simple like it
+- [X] Solve CSES again to get back into the zone [^1]
+- [X] Investigate why the compile takes so much time. [^2]
+
+[^1]: [CSES - User svaderia2](https://cses.fi/user/237364)
+[^2]: [Compiling the C++ program faster - Filling the gaps](https://svaderia.github.io/wiki/compiling-the-c++-program-faster/)
 
 # Competitive Programming
 |Online Judge|Solved|
