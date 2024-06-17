@@ -8,13 +8,28 @@ string to_string(node c) {
     return to_string(c.data);
 }
 
-struct SegTree{
+struct seg_tree{
     typedef node T;
 
+private :
+
+    T unit = T(-INF); // identity element
+    T merge(T a, T b) {
+        return T(max(a.data, b.data));
+    } // any associatinve function
+
+    int n;
+    vector<int> lo, hi;
+    vector<T> seg;
+
+    void pull(int id){
+        seg[id] = merge(seg[2 * id], seg[2 * id + 1]);
+    }
+
 public:
-    SegTree(int nn, T def) : n(nn), lo(4 * n), hi(4 * n), seg(4 * n, def) { build(1, 0, n - 1); }
-    SegTree(int nn) : n(nn), lo(4 * n), hi(4 * n), seg(4 * n, unit) { build(1, 0, n - 1); }
-    SegTree(vi &arr) : n(sz(arr)), lo(4 * n), hi(4 * n), seg(4 * n) { build(1, 0, n - 1, arr); }
+    seg_tree(int nn, T def) : n(nn), lo(4 * n), hi(4 * n), seg(4 * n, def) { build(1, 0, n - 1); }
+    seg_tree(int nn) : n(nn), lo(4 * n), hi(4 * n), seg(4 * n, unit) { build(1, 0, n - 1); }
+    seg_tree(vi &arr) : n(sz(arr)), lo(4 * n), hi(4 * n), seg(4 * n) { build(1, 0, n - 1, arr); }
 
     void build(int id, int l, int r){
         lo[id] = l, hi[id] = r;
@@ -33,9 +48,10 @@ public:
         int mid = (l + r) / 2;
         build(2 * id, l, mid, arr);
         build(2 * id + 1, mid + 1, r, arr);
-        update(id);
+        pull(id);
     }
 
+    // query [l, r]
     T query(int l, int r, int id = 1){
         // outside
         if(lo[id] > r || hi[id] < l){
@@ -65,7 +81,7 @@ public:
 
         set(p, val, 2 * id);
         set(p, val, 2 * id + 1);
-        update(id);
+        pull(id);
     }
 
     int right_bound(int l, int val, int id = 1){
@@ -83,20 +99,5 @@ public:
         else
             return right_bound(l, val, 2 * id + 1);
 
-    }
-
-private :
-    T unit = T(-INF);
-
-    T merge(T a, T b) {
-        return T(max(a.data, b.data));
-    } // any associatinve function
-
-    int n;
-    vi lo, hi;
-    vector<T> seg;
-
-    void update(int idx){
-        seg[idx] = merge(seg[2 * idx], seg[2 * idx + 1]);
     }
 };
