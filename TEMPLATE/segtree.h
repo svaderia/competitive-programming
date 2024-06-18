@@ -1,35 +1,37 @@
-struct node{
+struct segment {
+    // TODO: check if it can overflow
+    int minimum;
     int data;
-    node(int val) : data(val) {}
-    node() {}
-}typedef node;
 
-string to_string(node c) {
-    return to_string(c.data);
-}
+    // TODO: Make sure the default constructor initialises identity element.
+    segment(int m = INF) : minimum(m) {}
 
-struct seg_tree{
-    typedef node T;
-
-private :
-
-    T unit = T(-INF); // identity element
-    T merge(T a, T b) {
-        return T(max(a.data, b.data));
-    } // any associatinve function
-
-    int n;
-    vector<int> lo, hi;
-    vector<T> seg;
-
-    void pull(int id){
-        seg[id] = merge(seg[2 * id], seg[2 * id + 1]);
+    // TODO: Update to any associative function.
+    void join(const segment &other) {
+        minimum = min(minimum, other.minimum);
     }
 
-public:
-    seg_tree(int nn, T def) : n(nn), lo(4 * n), hi(4 * n), seg(4 * n, def) { build(1, 0, n - 1); }
-    seg_tree(int nn) : n(nn), lo(4 * n), hi(4 * n), seg(4 * n, unit) { build(1, 0, n - 1); }
-    seg_tree(vi &arr) : n(sz(arr)), lo(4 * n), hi(4 * n), seg(4 * n) { build(1, 0, n - 1, arr); }
+    void join(const segment &seg0, const segment &seg1) {
+        *this = seg0;
+        join(seg1);
+    }
+};
+
+/* string to_string(segment c) { */
+/*     return to_string(c.minimum); */
+/* } */
+
+struct seg_tree{
+    int n;
+    vector<int> lo, hi;
+    vector<segment> seg;
+
+    void pull(int id){
+        seg[id].join(seg[2 * id], seg[2 * id + 1]);
+    }
+
+    seg_tree(int nn) : n(nn), lo(4 * n), hi(4 * n), seg(4 * n) { build(1, 0, n - 1); }
+    seg_tree(vector<segment> &arr) : n(sz(arr)), lo(4 * n), hi(4 * n), seg(4 * n) { build(1, 0, n - 1, arr); }
 
     void build(int id, int l, int r){
         lo[id] = l, hi[id] = r;
@@ -39,10 +41,10 @@ public:
         build(2 * id + 1, mid + 1, r);
     }
 
-    void build(int id, int l, int r, vi &arr){
+    void build(int id, int l, int r, vector<segment> &arr){
         lo[id] = l, hi[id] = r;
         if(l == r){
-            seg[id] = T(arr[l]);
+            seg[id] = arr[l];
             return;
         }
         int mid = (l + r) / 2;
@@ -52,23 +54,23 @@ public:
     }
 
     // query [l, r]
-    T query(int l, int r, int id = 1){
+    segment query(int l, int r, int id = 1){
         // outside
         if(lo[id] > r || hi[id] < l){
-            return unit;
+            return segment();
         }
 
         if(l <= lo[id] && hi[id] <= r){
             return seg[id];
         }
 
-        T leftQuery = query(l, r, 2 * id);
-        T rightQuery = query(l, r, 2 * id + 1);
-
-        return  merge(leftQuery, rightQuery);
+        segment lquery = query(l, r, 2 * id);
+        segment rquery = query(l, r, 2 * id + 1);
+        lquery.join(rquery);
+        return lquery;
     }
 
-    void set(int p, int val, int id = 1){
+    void set(int p, segment val, int id = 1){
         // No overlap
         if(p < lo[id] || p > hi[id]){
             return;

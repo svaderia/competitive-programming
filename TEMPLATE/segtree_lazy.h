@@ -1,71 +1,103 @@
-// Improvement : Add the segment_change and segment structs from here.
-// https://github.com/nealwu/competitive-programming/blob/master/seg_tree/seg_tree.cc
+struct segment_change {
+    // TODO: check for overflows
+    int to_add, to_set;
 
-struct node{
-    int data;
-    int delta;
-    bool lazyset;
-    node(int val) : data(val) , delta(0), lazyset(false) {}
-    node() {}
-}typedef node;
+    // TODO: Make sure the default constructor initialises identity element.
+    segment_change(int _to_add = 0, int _to_set = -INF) : to_add(_to_add), to_set(_to_set) {}
 
-string to_string(node c) {
-    return to_string(c.data);
-}
-
-struct seg_tree_lazy{
-    typedef node T;
-
-private:
-    int n;
-    vi lo, hi;
-    vector<T> seg;
-
-    T unit = T(0); 
-    T merge(T a, T b) {
-        return T(a.data + b.data);
-    } // any associatinve function
-
-    inline void pull(int id){
-        seg[id] = merge(seg[2 * id], seg[2 * id + 1]);
+    bool has_set() const {
+        return to_set != -INF;
     }
 
-    // updates node's data when lazy data is added. 
-    inline void update_lazy(int id, int lval){
-        seg[id].data += (hi[id] - lo[id] + 1) * lval;
+    bool has_change() const {
+        return has_set() || to_add != 0;
     }
 
-    // supports both range_increase and range_set together.
-    // lazyset bool is used to differentiate between set and increase
-    void push(int id){
-        if(lo[id] != hi[id]){
-            int left = 2 * id, right = left + 1;
-            if(seg[id].lazyset){
-                seg[left].lazyset = seg[right].lazyset = true;
-                seg[left].delta = seg[right].delta = seg[left].data = seg[right].data = 0;
-            }
-            seg[left].delta += seg[id].delta;
-            seg[right].delta += seg[id].delta;
-            update_lazy(left, seg[id].delta);
-            update_lazy(right, seg[id].delta);
+    // Return the combined result of applying this segment_change followed by `other`.
+    // TODO: check for boundary values.
+    segment_change combine(const segment_change &other) {
+        if (other.has_set()) {
+            return other;
         }
-        seg[id].lazyset = false;
-        seg[id].delta = 0;
+
+        segment_change n = segment_change(to_add + other.to_add, to_set);
+        return n;
+    }
+};
+
+/* string to_string(segment_change c) { */
+/*     vector<int> print = {c.to_add, c.to_set}; */
+/*     return to_string(print) ; */
+/* } */
+
+struct segment {
+    // TODO: check if it can overflow
+    int sum;
+    int len;
+
+    // TODO: Make sure the default constructor initialises identity element.
+    segment(int _sum = 0, int _len = 0) : sum(_sum), len(_len) {}
+
+    void apply(const segment_change &change) {
+        if (change.has_set()) {
+            sum = len * change.to_set;
+        }
+        sum += len * change.to_add;
     }
 
-public:
-    void build(int id, int l, int r){
+    // TODO: Update to any associative function.
+    void join(const segment &other) {
+        sum += other.sum;
+        len += other.len;
+    }
+
+    void join(const segment &seg0, const segment &seg1) {
+        *this = seg0;
+        join(seg1);
+    }
+};
+
+/* string to_string(segment c) { */
+/*     vector<int> print = {c.sum, c.len}; */
+/*     return to_string(print) ; */
+/* } */
+
+struct seg_tree_lazy {
+    int n;
+    vector<int> lo, hi;
+    vector<segment> seg;
+    vector<segment_change> seg_change;
+
+    void pull(int id) {
+        seg[id].join(seg[2 * id], seg[2 * id + 1]);
+    }
+
+    void apply_and_combine(int id, const segment_change &change) {
+        seg[id].apply(change);
+        seg_change[id] = seg_change[id].combine(change);
+    }
+
+    void push(int id) {
+        if (lo[id] != hi[id] && seg_change[id].has_change()) {
+            apply_and_combine(2 * id, seg_change[id]);
+            apply_and_combine(2 * id + 1, seg_change[id]);
+        }
+        seg_change[id] = segment_change();
+    }
+
+    void build(int id, int l, int r) {
         lo[id] = l, hi[id] = r;
-        if(l == r) return;
+        if (l == r)
+            return;
         int mid = (l + r) / 2;
         build(2 * id, l, mid);
-        build(2 * id, mid + 1, r);
+        build(2 * id + 1, mid + 1, r);
     }
 
-    void build(int id, int l, int r, vi &arr){
+    void build(int id, int l, int r, vector<segment> &arr) {
         lo[id] = l, hi[id] = r;
-        if(l == r){
-            seg[id] = T(arr[l]);
+        if (l == r) {
+            seg[id] = arr[l];
             return;
         }
         int mid = (l + r) / 2;
@@ -74,75 +106,64 @@ public:
         pull(id);
     }
 
-    T query(int l, int r, int id = 1){
+    // query [l, r]
+    segment query(int l, int r, int id = 1) {
         // outside
-        if(lo[id] > r || hi[id] < l)
-            return unit;
+        if (lo[id] > r || hi[id] < l) {
+            return segment();
+        }
 
-        push(id);
-
-        if(l <= lo[id] && hi[id] <= r)
+        if (l <= lo[id] && hi[id] <= r) {
             return seg[id];
+        }
 
-        T lquery = query(l, r, 2 * id);
-        T rquery = query(l, r, 2 * id + 1);
-        pull(id);
+        push(id);
 
-        return  merge(lquery, rquery);
+        segment lquery = query(l, r, 2 * id);
+        segment rquery = query(l, r, 2 * id + 1);
+        lquery.join(rquery);
+        return lquery;
     }
 
-    void range_increase(int l, int r, int val, int id = 1){
-        // outside
-        if(lo[id] > r || hi[id] < l) return;
+    void range_change(int l, int r, segment_change change, int id = 1) {
+        if (l > hi[id] || r < lo[id])
+            return;
 
-        if(l <= lo[id] && hi[id] <= r){
-            seg[id].delta += val;
-            update_lazy(id, val);
+        if (l <= lo[id] && hi[id] <= r) {
+            apply_and_combine(id, change);
             return;
         }
 
         push(id);
-        range_increase(l, r, val, 2 * id);
-        range_increase(l, r, val, 2 * id + 1);
+
+        range_change(l, r, change, 2 * id);
+        range_change(l, r, change, 2 * id + 1);
+
         pull(id);
     }
 
-    void range_set(int l, int r, int val, int id = 1){
-        // outside
-        if(lo[id] > r || hi[id] < l) return;
-
-        if(l <= lo[id] && hi[id] <= r){
-            seg[id].data = 0;
-            seg[id].delta = val;
-            seg[id].lazyset = true;
-            update_lazy(id, val);
-            return;
-        }
-
-        push(id);
-        range_set(l, r, val, 2 * id);
-        range_set(l, r, val, 2 * id + 1);
-        pull(id);
-    }
-
-    void set(int p, int val, int id = 1){
+    void set(int p, segment val, int id = 1) {
         // No overlap
-        if(p < lo[id] || p > hi[id])
+        if (p < lo[id] || p > hi[id]) {
             return;
+        }
 
-        if(lo[id] == hi[id]){
+        if (lo[id] == hi[id]) {
             seg[id] = val;
             return;
         }
 
         push(id);
+
         set(p, val, 2 * id);
         set(p, val, 2 * id + 1);
         pull(id);
     }
 
-    seg_tree_lazy(int nn, T def) : n(nn), lo(4 * n), hi(4 * n), seg(4 * n, def) { build(1, 0, n - 1); }
-    seg_tree_lazy(int nn) : n(nn), lo(4 * n), hi(4 * n), seg(4 * n)  { build(1, 0, n - 1); }
-    seg_tree_lazy(vi &arr) : n(sz(arr)), lo(4 * n), hi(4 * n), seg(4 * n)  { build(1, 0, n - 1, arr); }
-
+    seg_tree_lazy(int nn) : n(nn), lo(4 * n), hi(4 * n), seg(4 * n), seg_change(4 * n) {
+        build(1, 0, n - 1);
+    }
+    seg_tree_lazy(vector<segment> &arr) : n(sz(arr)), lo(4 * n), hi(4 * n), seg(4 * n), seg_change(4 * n) {
+        build(1, 0, n - 1, arr);
+    }
 };

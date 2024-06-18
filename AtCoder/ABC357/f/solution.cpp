@@ -261,15 +261,12 @@ void solve(){
             cin >> l >> r;
             l--, r--;
             cout << s.query(l, r).ab << endl;
-
         }else{
             int l, r, val;
             cin >> l >> r >> val;
             l--, r--;
             s.range_increase(l, r, val, op);
         }
-
-
     }
 
 
