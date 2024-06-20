@@ -85,24 +85,24 @@ struct seg_tree_lazy {
         seg_change[id] = segment_change();
     }
 
-    void build(int id, int l, int r) {
+    void build(int l, int r, int id) {
         lo[id] = l, hi[id] = r;
         if (l == r)
             return;
         int mid = (l + r) / 2;
-        build(2 * id, l, mid);
-        build(2 * id + 1, mid + 1, r);
+        build(l, mid, 2 * id);
+        build(mid + 1, r, 2 * id);
     }
 
-    void build(int id, int l, int r, vector<segment> &arr) {
+    void build(int l, int r, int id, vector<segment> &arr) {
         lo[id] = l, hi[id] = r;
         if (l == r) {
             seg[id] = arr[l];
             return;
         }
         int mid = (l + r) / 2;
-        build(2 * id, l, mid, arr);
-        build(2 * id + 1, mid + 1, r, arr);
+        build(l, mid, 2 * id, arr);
+        build(mid + 1, r, 2 * id, arr);
         pull(id);
     }
 
@@ -125,7 +125,7 @@ struct seg_tree_lazy {
         return lquery;
     }
 
-    void range_change(int l, int r, segment_change change, int id = 1) {
+    void range_update(int l, int r, segment_change change, int id = 1) {
         if (l > hi[id] || r < lo[id])
             return;
 
@@ -136,8 +136,8 @@ struct seg_tree_lazy {
 
         push(id);
 
-        range_change(l, r, change, 2 * id);
-        range_change(l, r, change, 2 * id + 1);
+        range_update(l, r, change, 2 * id);
+        range_update(l, r, change, 2 * id + 1);
 
         pull(id);
     }
@@ -161,9 +161,9 @@ struct seg_tree_lazy {
     }
 
     seg_tree_lazy(int nn) : n(nn), lo(4 * n), hi(4 * n), seg(4 * n), seg_change(4 * n) {
-        build(1, 0, n - 1);
+        build(0, n - 1, 1);
     }
     seg_tree_lazy(vector<segment> &arr) : n(sz(arr)), lo(4 * n), hi(4 * n), seg(4 * n), seg_change(4 * n) {
-        build(1, 0, n - 1, arr);
+        build(0, n - 1, 1, arr);
     }
 };

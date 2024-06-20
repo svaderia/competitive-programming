@@ -18,49 +18,54 @@ struct segment {
 };
 
 /* string to_string(segment c) { */
-/*     return to_string(c.minimum); */
+/*    return to_string(c.minimum); */
 /* } */
 
-struct seg_tree{
+struct seg_tree {
     int n;
     vector<int> lo, hi;
     vector<segment> seg;
 
-    void pull(int id){
+    seg_tree(int nn) : n(nn), lo(4 * n), hi(4 * n), seg(4 * n) {
+        build(0, n - 1, 1);
+    }
+    seg_tree(vector<segment> &arr) : n(sz(arr)), lo(4 * n), hi(4 * n), seg(4 * n) {
+        build(0, n - 1, 1, arr);
+    }
+
+    void pull(int id) {
         seg[id].join(seg[2 * id], seg[2 * id + 1]);
     }
 
-    seg_tree(int nn) : n(nn), lo(4 * n), hi(4 * n), seg(4 * n) { build(1, 0, n - 1); }
-    seg_tree(vector<segment> &arr) : n(sz(arr)), lo(4 * n), hi(4 * n), seg(4 * n) { build(1, 0, n - 1, arr); }
-
-    void build(int id, int l, int r){
+    void build(int l, int r, int id) {
         lo[id] = l, hi[id] = r;
-        if(l == r) return;
+        if (l == r)
+            return;
         int mid = (l + r) / 2;
-        build(2 * id, l, mid);
-        build(2 * id + 1, mid + 1, r);
+        build(l, mid, 2 * id);
+        build(mid + 1, l, 2 * id + 1);
     }
 
-    void build(int id, int l, int r, vector<segment> &arr){
+    void build(int l, int r, int id, vector<segment> &arr) {
         lo[id] = l, hi[id] = r;
-        if(l == r){
+        if (l == r) {
             seg[id] = arr[l];
             return;
         }
         int mid = (l + r) / 2;
-        build(2 * id, l, mid, arr);
-        build(2 * id + 1, mid + 1, r, arr);
+        build(l, mid, 2 * id, arr);
+        build(mid + 1, r, 2 * id + 1, arr);
         pull(id);
     }
 
     // query [l, r]
-    segment query(int l, int r, int id = 1){
+    segment query(int l, int r, int id = 1) {
         // outside
-        if(lo[id] > r || hi[id] < l){
+        if (lo[id] > r || hi[id] < l) {
             return segment();
         }
 
-        if(l <= lo[id] && hi[id] <= r){
+        if (l <= lo[id] && hi[id] <= r) {
             return seg[id];
         }
 
@@ -70,13 +75,13 @@ struct seg_tree{
         return lquery;
     }
 
-    void set(int p, segment val, int id = 1){
+    void set(int p, segment val, int id = 1) {
         // No overlap
-        if(p < lo[id] || p > hi[id]){
+        if (p < lo[id] || p > hi[id]) {
             return;
         }
 
-        if(lo[id] == hi[id]){
+        if (lo[id] == hi[id]) {
             seg[id] = val;
             return;
         }
@@ -86,20 +91,19 @@ struct seg_tree{
         pull(id);
     }
 
-    int right_bound(int l, int val, int id = 1){
+    int right_bound(int l, int val, int id = 1) {
         // No overlap
-        if(l > hi[id] || seg[id].data < val){
+        if (l > hi[id] || seg[id].data < val) {
             return 0;
         }
 
-        if(lo[id] == hi[id]){
+        if (lo[id] == hi[id]) {
             return lo[id];
         }
 
-        if(seg[2*id].data >= val)
+        if (seg[2 * id].data >= val)
             return right_bound(l, val, 2 * id);
         else
             return right_bound(l, val, 2 * id + 1);
-
     }
 };
