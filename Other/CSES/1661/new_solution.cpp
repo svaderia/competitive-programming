@@ -1,5 +1,7 @@
 // clang-format off
 #include <bits/stdc++.h>
+#include <ext/pb_ds/assoc_container.hpp> 
+using namespace __gnu_pbds;
 using namespace std;
 
 typedef long long int lli;
@@ -39,6 +41,20 @@ template<typename T> T gcd(T a, T b){return(b?__gcd(a,b):a);}
 template <typename T> T lcm(T a, T b){return (a*b)/gcd(a,b); }
 // clang-format on
 
+
+struct chash {
+    const int RANDOM = (long long)(make_unique<char>().get()) ^ chrono::high_resolution_clock::now().time_since_epoch().count();
+    static unsigned long long hash_f(unsigned long long x) {
+        x += 0x9e3779b97f4a7c15;
+        x = (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9;
+        x = (x ^ (x >> 27)) * 0x94d049bb133111eb;
+        return x ^ (x >> 31);
+    }
+    static unsigned hash_combine(unsigned a, unsigned b) { return a * 31 + b; }
+    int operator()(int x) const { return hash_f(x)^RANDOM; }
+};
+gp_hash_table<int, int, chash> table; // Hash table, good alternative of unordered_map
+
 void solve() {
     int n, x;
     cin >> n >> x;
@@ -54,7 +70,7 @@ void solve() {
     }
 
     int ans = 0;
-    unordered_map<int, int> sofar;
+    gp_hash_table<int, int, chash> sofar; // Hash table, good alternative of unordered_map
     sofar[0] = 1;
     rep(i, n) {
         int fd = pref[i + 1] - x;
