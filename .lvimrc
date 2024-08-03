@@ -37,6 +37,11 @@ iabbrev ttemplate <ESC>:-1read $CCTEMPLATEPATH/solution.cpp<CR>:40<CR>
 nnoremap <Leader>i yyp^cwcin,<ESC>:.s/,/ >>/g<CR><ESC>:nohlsearch<CR>o
 
 " Insert cin for Arrays
+" You can't use :Yanks here.
+" We are disabling this features because my mapping breaks with it enabled. 
+" I use this mapping more than I use :Yanks during competitive
+let g:yoinkIncludeDeleteOperations=0
+let g:yoinkSyncNumberedRegisters=0 
 nnoremap <Leader>o yypk^f(lyi(orep(i, <ESC>pa){<ESC>jv>^df icin, <ESC>:.s/(/\[/g<CR>:.s/)/\]/g<CR>:;.s/,/ >>/g<CR>:.s/\[<C-r>0/\[i/g<CR><ESC>o}<ESC>o
 
 " Change to single TC
