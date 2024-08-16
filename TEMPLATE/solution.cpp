@@ -1,6 +1,11 @@
 // clang-format off
 #include <bits/stdc++.h>
 using namespace std;
+#ifdef DEBUG
+    #include "debug.h"
+#else
+    #define dbg(...) 0
+#endif
 
 typedef long long int lli;
 #define int lli

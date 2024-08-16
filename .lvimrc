@@ -1,7 +1,7 @@
 " Set makeprg with required warning flags for CP
 " TODO: If you ever make changes the flags, please recompile the stdc++.h
 
-set makeprg=g++-14\ -std=c++17\ -Wall\ -Wextra\ -Wshadow\ -Wconversion\ -DDEBUG\ %\ -o\ %:r
+set makeprg=g++-14\ -std=c++17\ -I\ $CCTEMPLATEPATH/\ -Wall\ -Wextra\ -Wshadow\ -Wconversion\ -DDEBUG\ %\ -o\ %:r
 
 " Compile and run the code inside vim only
 nnoremap <Leader>g :w<CR>:Make<CR>
