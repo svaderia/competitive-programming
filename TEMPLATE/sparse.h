@@ -14,7 +14,7 @@ template <typename T> struct sparse_table {
         return min(a, b);
     }
 
-    sprase_table(vector<T> &a) {
+    sparse_table(vector<T> &a) {
         n = sz(a);
         dp.resize(LOG);
         dp[0] = a;
