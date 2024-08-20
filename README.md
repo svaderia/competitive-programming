@@ -17,10 +17,10 @@
 |Online Judge|Solved|
 |------ | ------|
 |CodeChef | 129 |  
-|CodeForces | 241 |  
+|CodeForces | 255 |  
 |SPOJ | 61 |  
-|AtCoder | 135 |  
+|AtCoder | 139 |  
 |Leetcode | 30 |  
 |Other | 198 |  
 |15195 | 38 |  
-|Total | 832 |
+|Total | 850 |
