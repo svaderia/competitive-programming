@@ -18,6 +18,8 @@ nnoremap <Leader>m :/void solve<CR>GNjmskkkme`s:nohlsearch<CR>zz
 
 " adding templates for Competitive
 iabbrev trmq <ESC>ma'e:-1read $CCTEMPLATEPATH/rmq.h<CR>`a
+iabbrev tsparse <ESC>ma'e:-1read $CCTEMPLATEPATH/sparse.h<CR>`a
+iabbrev tsuffix <ESC>ma'e:-1read $CCTEMPLATEPATH/suffix_array.h<CR>`a
 iabbrev tdsu <ESC>ma'e:-1read $CCTEMPLATEPATH/dsu.h<CR>`a
 iabbrev tbigint <ESC>ma'e:-1read $CCTEMPLATEPATH/bigint.h<CR>`a
 iabbrev tmodint <ESC>ma'e:-1read $CCTEMPLATEPATH/modint.h<CR>`a
